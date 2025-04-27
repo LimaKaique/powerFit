@@ -193,15 +193,20 @@ function verificaAssinatura(req, res, next) {
 app.get('/mensalidades', (req, res) => {
   const usuario_id = req.session.usuario_id;
   if (!usuario_id) return res.status(401).send('Não logado');
+
   db.query(
-    `SELECT mes_ano, vencimento, pago, data_pagamento
-     FROM mensalidades WHERE usuario_id = ? ORDER BY vencimento`,
+    `SELECT id, mes_ano, vencimento, pago, data_pagamento
+     FROM mensalidades
+     WHERE usuario_id = ?
+     ORDER BY vencimento`,
     [usuario_id],
-    (err, results) => err
-      ? res.status(500).send('Erro')
-      : res.json(results)
+    (err, results) => {
+      if (err) return res.status(500).send('Erro');
+      res.json(results);
+    }
   );
 });
+
 
 app.post('/acessos', (req,res) => {
   const usuario_id = req.session.usuario_id;
@@ -225,6 +230,56 @@ function verificaPlano(req, res, next) {
   // logado e não assinou → deixa seguir para planos
   next();
 }
+
+const cron = require('node-cron');
+
+// roda todo dia 1 às 00:00
+cron.schedule('0 0 1 * *', () => {
+  const sql = `
+    INSERT INTO mensalidades (usuario_id, mes_ano, vencimento)
+    SELECT usuario_id,
+           DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 MONTH), '%Y-%m'),
+           LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 MONTH))
+    FROM assinaturas
+    WHERE status='pago' AND proximo_vencimento >= CURDATE()
+  `;
+  db.query(sql, err => {
+    if (err) console.error('Erro ao gerar mensalidades:', err);
+    else console.log('Mensalidades do próximo mês geradas.');
+  });
+});
+
+// marcar uma mensalidade como paga
+app.post('/mensalidades/:id/pagar', (req, res) => {
+  const usuario_id = req.session.usuario_id;
+  const mensalidadeId = req.params.id;
+  console.log('>> Pagamento solicitado: mensalidade id =', mensalidadeId, 'usuário =', usuario_id);
+
+  if (!usuario_id) {
+    console.log('Usuário não logado tentou pagar');
+    return res.status(401).send('Não logado');
+  }
+
+  const sql = `
+    UPDATE mensalidades
+      SET pago = TRUE,
+          data_pagamento = NOW()
+    WHERE id = ? AND usuario_id = ?
+  `;
+  db.query(sql, [mensalidadeId, usuario_id], (err, result) => {
+    if (err) {
+      console.error('Erro no UPDATE mensalidades:', err);
+      return res.status(500).send('Erro ao registrar pagamento');
+    }
+    console.log('Resultado do UPDATE:', result);
+    if (result.affectedRows === 0) {
+      console.log('Nenhuma linha atualizada — id não encontrado ou pertence a outro usuário');
+      return res.status(404).send('Mensalidade não encontrada');
+    }
+    res.send('Pagamento registrado com sucesso');
+  });
+});
+
 
 // — ROTAS DE PÁGINAS
 app.get('/',           (req,res)=> res.sendFile(path.join(__dirname,'public/index.html')));

@@ -65,3 +65,27 @@ INSERT INTO aulas (nome, instrutor, horario, local) VALUES
   ('Pilates', 'Carlos Oliveira','2024-05-01 09:00:00', 'Sala B'),
   ('Musculação','Ana Costa',     '2024-05-01 10:00:00', 'Sala C');
 
+-- habilite o event_scheduler
+SET GLOBAL event_scheduler = ON;
+
+-- crie um evento que rode no dia 1 de cada mês à meia-noite
+CREATE EVENT IF NOT EXISTS gerar_mensalidades
+ON SCHEDULE
+  EVERY 1 MONTH
+  STARTS CONCAT(DATE_FORMAT(NOW(),'%Y-%m-01'), ' 00:00:00')
+DO
+INSERT INTO mensalidades (usuario_id, mes_ano, vencimento)
+SELECT
+  usuario_id,
+  DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 MONTH), '%Y-%m'),
+  LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 MONTH))
+FROM assinaturas
+WHERE status = 'pago' AND proximo_vencimento >= CURDATE();
+
+
+INSERT INTO mensalidades (usuario_id, mes_ano, vencimento)
+SELECT usuario_id,
+       DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 1 MONTH), '%Y-%m'),
+       LAST_DAY(DATE_ADD(NOW(), INTERVAL 1 MONTH))
+FROM assinaturas
+WHERE status='pago' AND proximo_vencimento >= CURDATE();
