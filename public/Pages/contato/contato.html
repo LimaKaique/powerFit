@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFit - Suporte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="contato.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="container">
+            <a href="index.html" class="logo">Power<span>Fit</span></a>
+            <nav class="navegacao">
+                <ul class="menu">
+                    <li><a href="/Pages/inicio/sobre.html
+                        " class="ativo">Início</a></li>
+                    <li><a href="/Pages/Plano/planos.html">Planos</a></li>
+                    <li><a href="/Pages/contato/contato.html">Contato</a></li>
+                    <li><a href="/Pages/Login/login.html">Login</a></li>
+                    <li><a href="/Pages/Cadastro/cadastro.html">Cadastro</a></li>
+                </ul>
+                <div class="menu-mobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Precisa de Ajuda?</h1>
+                <p>Nossa equipe de suporte está pronta para ajudar você com qualquer dúvida ou problema.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Fale Conosco</a>
+                    <a href="#faq" class="btn-secondary">Perguntas Frequentes</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Atendimento ao Cliente">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-options" id="contact">
+        <div class="container">
+            <h2 class="section-title">Formas de Contato</h2>
+            <div class="options-grid">
+                <div class="option-card">
+                    <div class="icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Telefone</h3>
+                    <p>(11) 1234-5678</p>
+                    <p>Segunda a Sexta: 6h às 22h</p>
+                    <p>Sábado: 8h às 18h</p>
+                </div>
+                <div class="option-card">
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>E-mail</h3>
+                    <p>suporte@powerfit.com.br</p>
+                    <p>Resposta em até 24h</p>
+                </div>
+                <div class="option-card">
+                    <div class="icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Chat Online</h3>
+                    <p>Disponível 24/7</p>
+                    <a href="#" class="btn-small">Iniciar Chat</a>
+                </div>
+                <div class="option-card">
+                    <div class="icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Unidades</h3>
+                    <p>Encontre a academia mais próxima</p>
+                    <a href="#" class="btn-small">Localizar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Como posso cancelar minha assinatura?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O cancelamento pode ser feito diretamente em nossa central de atendimento, via e-mail ou pessoalmente em qualquer unidade. É necessário enviar uma solicitação com pelo menos 30 dias de antecedência.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Quais os documentos necessários para matrícula?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Você precisará de: RG ou CNH, CPF, comprovante de residência e atestado médico recente (para algumas modalidades). Pode ser cópia ou original.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        A academia oferece aula experimental?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Oferecemos 3 dias gratuitos para experimentar nossas instalações e aulas. Basta agendar pelo site ou diretamente na recepção.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Posso congelar minha mensalidade?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim, permitimos o congelamento por até 3 meses ao ano, mediante apresentação de justificativa (viagem, saúde, etc.). Taxa administrativa de R$ 30,00 por mês.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <div class="container">
+            <div class="form-container">
+                <h2>Envie sua Mensagem</h2>
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="membership">Assinatura/Planos</option>
+                            <option value="payment">Pagamentos</option>
+                            <option value="classes">Aulas</option>
+                            <option value="facility">Instalações</option>
+                            <option value="other">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+            <div class="form-info">
+                <h3>Informações Adicionais</h3>
+                <p>Nosso tempo médio de resposta é de 24 horas úteis. Para questões urgentes, recomendamos o contato telefônico.</p>
+                <div class="social-links">
+                    <p>Siga-nos nas redes sociais:</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>PowerFit</h3>
+                    <p>Transformando vidas através do fitness desde 2010. Nossa missão é oferecer a melhor estrutura e atendimento para você alcançar seus objetivos.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="inicio.html">Início</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="planos.html">Planos</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="suporte.html">Suporte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul>
+                        <li>Segunda a Sexta: 6h às 23h</li>
+                        <li>Sábado: 8h às 20h</li>
+                        <li>Domingo: 9h às 16h</li>
+                        <li>Feriados: 8h às 14h</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Assine para receber promoções e dicas fitness:</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 PowerFit Academia. Todos os direitos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="contato.js"></script>
+</body>
+</html>

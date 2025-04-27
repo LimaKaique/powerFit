@@ -1,0 +1,67 @@
+-- Seleciona o banco de dados
+create schema usuariosacademia;
+USE usuariosacademia;
+
+-- Tabela de cadastro de usuários
+CREATE TABLE cadastro (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(200) UNIQUE NOT NULL,
+  nome VARCHAR(400) NOT NULL,
+  senha VARCHAR(400) NOT NULL
+);
+
+CREATE TABLE mensalidades (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  mes_ano CHAR(7) NOT NULL,        -- ex: '2024-05'
+  vencimento DATE NOT NULL,
+  pago BOOLEAN DEFAULT FALSE,
+  data_pagamento DATETIME,
+  FOREIGN KEY (usuario_id) REFERENCES cadastro(id)
+);
+
+CREATE TABLE assinaturas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NOT NULL,
+  plano ENUM('basico','avancado','premium') NOT NULL,
+  data_assinatura DATETIME DEFAULT CURRENT_TIMESTAMP,
+  proximo_vencimento DATE NOT NULL,
+  status ENUM('pago','vencido') NOT NULL DEFAULT 'pago',
+  FOREIGN KEY (usuario_id) REFERENCES cadastro(id)
+);
+
+
+-- Tabela de registro de acessos (entradas e saídas)
+CREATE TABLE acessos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  usuario_id INT,
+  tipo ENUM('entrada', 'saida') NOT NULL,
+  horario DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (usuario_id) REFERENCES cadastro(id)
+);
+
+
+CREATE TABLE aulas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(200) NOT NULL,
+  instrutor VARCHAR(200) NOT NULL,
+  horario DATETIME NOT NULL,
+  local VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE agendamentos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  usuario_id INT,
+  aula_id INT,
+  data_agendamento DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (usuario_id) REFERENCES cadastro(id),
+  FOREIGN KEY (aula_id) REFERENCES aulas(id)
+);
+
+
+INSERT INTO aulas (nome, instrutor, horario, local) VALUES
+  ('Yoga',    'Maria Silva',    '2024-05-01 08:00:00', 'Sala A'),
+  ('Pilates', 'Carlos Oliveira','2024-05-01 09:00:00', 'Sala B'),
+  ('Musculação','Ana Costa',     '2024-05-01 10:00:00', 'Sala C');
+

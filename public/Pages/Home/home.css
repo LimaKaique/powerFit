@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    padding: 10px;
+    color: white;
+}
+
+header .logo {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+.agendar-container {
+    padding: 30px;
+}
+
+.agendar-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.aulas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.aula-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.aula-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.aula-card p {
+    margin: 5px 0;
+}
+
+.agendar-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.agendar-btn:hover {
+    background-color: #45a049;
+}

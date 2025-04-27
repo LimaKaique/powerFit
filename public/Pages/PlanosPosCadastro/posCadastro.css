@@ -1,0 +1,366 @@
+:root {
+    --primary: #ff4757;
+    --primary-dark: #e84118;
+    --secondary: #2f3542;
+    --light: #f1f2f6;
+    --dark: #1e272e;
+    --gray: #a4b0be;
+    --success: #2ed573;
+    --white: #ffffff;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--light);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-list a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+    width: 100%;
+}
+
+.nav-list a:hover,
+.nav-list a.active {
+    color: var(--primary);
+}
+
+.plans-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    padding: 100px 0;
+}
+
+.plans-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.plans-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+    color: var(--secondary);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--primary);
+    margin: 15px auto;
+}
+
+.plans-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.plan-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.plan-card:hover {
+    transform: translateY(-10px);
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--light);
+}
+
+.plan-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.price .period {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gray);
+}
+
+.popular-tag {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background-color: var(--success);
+    color: var(--white);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.plan-features li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.plan-features i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.plan-features .fa-check {
+    color: var(--success);
+}
+
+.plan-features .fa-times {
+    color: var(--primary);
+}
+
+.btn-plan {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-plan:hover {
+    background-color: var(--primary-dark);
+}
+
+.basic .btn-plan {
+    background-color: var(--secondary);
+}
+
+.basic .btn-plan:hover {
+    background-color: var(--dark);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.benefit-item {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.benefit-item i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.benefit-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--secondary);
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px;
+    background-color: var(--white);
+    border: none;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: var(--white);
+}
+
+.faq-answer p {
+    padding: 0 20px 20px;
+    color: var(--gray);
+}
+
+.faq-item.active .faq-question {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+}
+
+.footer {
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: var(--white);
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .plans-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .plan-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .plans-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .plans-hero p {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .price {
+        font-size: 1.5rem;
+    }
+}
