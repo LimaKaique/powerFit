@@ -55,31 +55,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// posCadastro.js (corrigido)
 document.addEventListener('DOMContentLoaded', function() {
     const planButtons = document.querySelectorAll('.btn-plan');
     planButtons.forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         const planoId = button.getAttribute('data-plano');
-        // Envia POST para /assinatura com o ID do plano selecionado
-        fetch('/assinatura', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ plano: planoId })
-        })
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error('Erro na requisição');
-        })
-        .then(data => {
-          console.log('Resposta da assinatura:', data);
-          // Aqui você pode redirecionar ou exibir mensagem ao usuário
-        })
-        .catch(error => console.error('Erro no fetch:', error));
+  
+        try {
+          const res = await fetch('/assinatura', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plano: planoId })
+          });
+  
+          const text = await res.text();           // servidor responde com texto
+          if (!res.ok) throw new Error(text);
+  
+          console.log('Resposta da assinatura:', text);
+          // **agora sim** redireciona para a home (ou outra rota)
+          window.location.href = '/home';
+  
+        } catch (err) {
+          console.error('Erro no fetch:', err);
+          alert(`Não foi possível assinar: ${err.message}`);
+        }
       });
     });
   });
   
-
