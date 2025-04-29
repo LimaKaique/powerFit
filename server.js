@@ -148,7 +148,6 @@ app.get('/minhasAulas', (req, res) => {
   });
 });
 
-// Rota para assinar um plano
 app.post('/assinatura', (req, res) => {
   const usuario_id = req.session.usuario_id;
   const { plano } = req.body;
@@ -157,6 +156,7 @@ app.post('/assinatura', (req, res) => {
   const hoje = new Date();
   const prox = new Date(hoje.getFullYear(), hoje.getMonth()+1, hoje.getDate());
 
+  // 1) Insere a assinatura
   db.query(
     `INSERT INTO assinaturas (usuario_id, plano, proximo_vencimento)
      VALUES (?,?,?)`,
@@ -166,46 +166,106 @@ app.post('/assinatura', (req, res) => {
         console.error('Erro no INSERT assinaturas:', err);
         return res.status(500).send('Erro ao assinar plano');
       }
-      // marca na sessão que o plano foi escolhido
-      req.session.assinouPlano = true;
-      res.send('Plano assinado');
+
+      // 2) Só depois de inserir a assinatura, gera as duas mensalidades
+      const geraMensalidades = [];
+      for (let i = 0; i < 2; i++) {
+        const dt = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
+        const mesAno = dt.toISOString().slice(0, 7);
+        const venc = new Date(dt.getFullYear(), dt.getMonth()+1, 0);
+        geraMensalidades.push([usuario_id, mesAno, venc.toISOString().slice(0,10)]);
+      }
+      db.query(
+        'INSERT INTO mensalidades (usuario_id, mes_ano, vencimento) VALUES ?',
+        [geraMensalidades],
+        (err2) => {
+          if (err2) {
+            console.error('Erro ao gerar mensalidades:', err2);
+            // aqui você pode decidir: falha na geração de mensalidades não impede assinatura
+            // por isso vamos apenas logar e ainda responder sucesso de assinatura
+          }
+          // 3) Finalmente, UMA ÚNICA resposta ao cliente:
+          res.send('Plano assinado e mensalidades iniciais criadas');
+        }
+      );
     }
   );
 });
 
-function verificaAssinatura(req, res, next) {
-  const usuario_id = req.session.usuario_id;
-  if (!usuario_id) return res.status(401).send('Não logado');
+
+function garanteSemAssinatura(req, res, next) {
+  const uid = req.session.usuario_id;
+  if (!uid) return res.redirect('/login');
+
   db.query(
-    `SELECT * FROM assinaturas
-     WHERE usuario_id = ? AND status = 'pago' AND proximo_vencimento >= CURDATE()`,
-    [usuario_id],
-    (err, subs) => {
-      if (err) return res.status(500).send('Erro');
-      if (!subs.length) return res.status(403).send('Plano não ativo');
+    `SELECT 1
+       FROM assinaturas
+      WHERE usuario_id = ?
+        AND status = 'pago'
+        AND proximo_vencimento >= CURDATE()
+      LIMIT 1`,
+    [uid],
+    (err, rows) => {
+      if (err) {
+        console.error('Erro verificando assinatura:', err);
+        return res.status(500).send('Erro no servidor');
+      }
+      if (rows.length) {
+        // já tem assinatura ativa → vai pra home
+        return res.redirect('/home');
+      }
+      // não tem assinatura → deixa ver a página de planos
       next();
     }
   );
 }
 
 
+
 // Rota para listar mensalidades do usuário
 app.get('/mensalidades', (req, res) => {
-  const usuario_id = req.session.usuario_id;
-  if (!usuario_id) return res.status(401).send('Não logado');
+  const uid = req.session.usuario_id;
+  if (!uid) return res.status(401).send('Não logado');
 
   db.query(
     `SELECT id, mes_ano, vencimento, pago, data_pagamento
-     FROM mensalidades
-     WHERE usuario_id = ?
-     ORDER BY vencimento`,
-    [usuario_id],
-    (err, results) => {
+     FROM mensalidades WHERE usuario_id=? ORDER BY vencimento`,
+    [uid],
+    (err, rows) => {
       if (err) return res.status(500).send('Erro');
-      res.json(results);
+
+      // converte mes_ano para Date e garante 2 registros:
+      const existentes = rows.map(r => ({
+        id: r.id,
+        mes_ano: r.mes_ano,
+        vencimento: r.vencimento,
+        pago: r.pago,
+        data_pagamento: r.data_pagamento
+      }));
+
+      // gera “futuros” até ter pelo menos 2
+      const faltam = 2 - existentes.length;
+      for (let i = 0; i < faltam; i++) {
+        const dt = new Date();
+        // se já houver uma mensalidade, baseia no último vencimento; caso contrário hoje
+        const base = existentes.length
+          ? new Date(existentes[existentes.length - 1].vencimento)
+          : dt;
+        const next = new Date(base.getFullYear(), base.getMonth()+1, 1);
+        existentes.push({
+          id: null,
+          mes_ano: next.toISOString().slice(0,7),
+          vencimento: next.toISOString().slice(0,10),
+          pago: false,
+          data_pagamento: null
+        });
+      }
+
+      res.json(existentes);
     }
   );
 });
+
 
 
 app.post('/acessos', (req,res) => {
@@ -280,18 +340,53 @@ app.post('/mensalidades/:id/pagar', (req, res) => {
   });
 });
 
+// Rota de Logout: destrói a sessão
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Erro ao destruir sessão:', err);
+      return res.status(500).send('Erro no logout');
+    }
+    res.send('Logout realizado');
+  });
+});
+
+function garanteAssinatura(req, res, next) {
+  const uid = req.session.usuario_id;
+  if (!uid) return res.redirect('/login');
+
+  db.query(
+    `SELECT 1
+       FROM assinaturas
+      WHERE usuario_id = ?
+        AND status = 'pago'
+        AND proximo_vencimento >= CURDATE()
+      LIMIT 1`,
+    [uid],
+    (err, rows) => {
+      if (err) return res.status(500).send('Erro no servidor');
+      if (!rows.length) return res.redirect('/planos');
+      next();
+    }
+  );
+}
+
 
 // — ROTAS DE PÁGINAS
 app.get('/',           (req,res)=> res.sendFile(path.join(__dirname,'public/index.html')));
 app.get('/login',      (req,res)=> res.sendFile(path.join(__dirname,'public/Pages/Login/login.html')));
 app.get('/agendarAula',(req,res)=> res.sendFile(path.join(__dirname,'public/Pages/AgendarAula/agendarAula.html')));
 app.get('/minhasAulas',(req,res)=> res.sendFile(path.join(__dirname,'public/Pages/MinhasAulas/minhasAulas.html')));
-app.get('/planos', verificaPlano, (req, res) => {
+app.get('/planos', garanteSemAssinatura, (req, res) => {
   res.sendFile(path.join(__dirname,'public/Pages/PlanosPosCadastro/posCadastro.html'));
 });
+
 app.get('/home', (req, res) => {
   if (!req.session.usuario_id) return res.redirect('/login');
   res.sendFile(path.join(__dirname,'public/Pages/Home/home.html'));
+});
+app.post('/agendar', garanteAssinatura, (req, res) => {
+  res.sendFile(path.join(__dirname,'public/Pages/AgendarAula/agendarAula.html'));
 });
 
 

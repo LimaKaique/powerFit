@@ -18,6 +18,7 @@ if (response.ok && naAcademia) {
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({ tipo:'entrada' })
   });
+  localStorage.setItem('naAcademia', 'true');
 }
   if (response.ok ) {
     //alert('Login realizado com sucesso!');

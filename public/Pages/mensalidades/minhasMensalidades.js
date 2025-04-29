@@ -21,7 +21,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         <p>Status: <span class="${pago ? 'pago' : 'pendente'}">${pago ? 'Pago' : 'Pendente'}</span></p>
         ${pago
           ? `<p>Pago em: ${dataPag}</p>`
-          : `<button class="btn-pagar" data-id="${m.id}">Pagar</button>`
+          : (m.id
+            ? `<button class="btn-pagar" data-id="${m.id}">Pagar</button>`
+            : `<span>A pagar</span>`
+          )
+        
         }
       `;
   
