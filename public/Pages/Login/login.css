@@ -1,44 +1,167 @@
-body {
-    background: #f0f2f5;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
     margin: 0;
-}
-
-.login-container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.login-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    border-radius: 5px;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Cabeçalho */
+  .cabecalho {
+    background-color: #1e40af;
+    padding: 20px 0;
+  }
+  
+  .cabecalho .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #facc15;
+    text-decoration: none;
+  }
+  
+  .logo span {
+    color: #22c55e;
+  }
+  
+  .navegacao .menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .navegacao .menu li a {
+    color: #f1f5f9;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+  
+  .navegacao .menu li a:hover,
+  .navegacao .menu li a.ativo {
+    background-color: #2563eb;
+  }
+  
+  /* Menu Mobile */
+  .menu-mobile {
+    display: none;
+    flex-direction: column;
     cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #45a049;
-}
+  }
+  
+  .menu-mobile span {
+    height: 3px;
+    width: 25px;
+    background: #f1f5f9;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Container de login */
+  .login-container {
+    background-color: #1e293b;
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  
+  .login-container h2 {
+    margin-bottom: 20px;
+    color: #facc15;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .login-container input[type="email"],
+  .login-container input[type="password"] {
+    padding: 14px;
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #f1f5f9;
+  }
+  
+  .login-container input::placeholder {
+    color: #64748b;
+  }
+  
+  .login-container label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+  }
+  
+  .login-container button {
+    padding: 14px;
+    background-color: #facc15;
+    color: #0f172a;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .login-container button:hover {
+    background-color: #eab308;
+    transform: scale(1.05);
+  }
+  
+  .login-container p {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #94a3b8;
+  }
+  
+  .login-container p a {
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .login-container p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .navegacao .menu {
+      display: none;
+    }
+    .menu-mobile {
+      display: flex;
+    }
+  }
+  

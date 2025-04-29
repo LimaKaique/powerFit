@@ -9,26 +9,7 @@
     <link rel="stylesheet" href="contato.css">
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="container">
-            <a href="index.html" class="logo">Power<span>Fit</span></a>
-            <nav class="navegacao">
-                <ul class="menu">
-                    <li><a href="/Pages/inicio/sobre.html
-                        " class="ativo">Início</a></li>
-                    <li><a href="/Pages/Plano/planos.html">Planos</a></li>
-                    <li><a href="/Pages/contato/contato.html">Contato</a></li>
-                    <li><a href="/Pages/Login/login.html">Login</a></li>
-                    <li><a href="/Pages/Cadastro/cadastro.html">Cadastro</a></li>
-                </ul>
-                <div class="menu-mobile">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <section class="hero">
         <div class="container">
@@ -227,6 +208,34 @@
         </div>
     </footer>
 
-    <script src="contato.js"></script>
+    <script>
+        (async function(){
+          // busca e injeta o HTML do header
+          const res = await fetch('/public/components/cabecalho/header.html');
+          if (!res.ok) return console.error('Header não encontrado');
+          const html = await res.text();
+          document.getElementById('header-placeholder').innerHTML = html;
+    
+          // carrega o CSS do header
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = '/public/components/cabecalho/header.css';
+          document.head.appendChild(link);
+    
+          // carrega e executa o header.js, e quando pronto chama initHeader()
+          await new Promise(resolve => {
+            const s = document.createElement('script');
+            s.src = '/public/components/cabecalho/header.js';
+            s.onload = resolve;
+            document.body.appendChild(s);
+          });
+          initHeader();
+    
+          // só então carregue o JS específico da página
+          const pageScript = document.createElement('script');
+          pageScript.src = 'Pages/inicio/sobre.js';  // ajuste para cada página
+          document.body.appendChild(pageScript);
+        })();
+      </script>
 </body>
 </html>

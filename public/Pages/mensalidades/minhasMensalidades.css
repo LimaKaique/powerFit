@@ -1,52 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #2563eb;
+  padding: 20px 0;
+}
+
+.header .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header h1 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+main {
+  flex: 1;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.mensalidades-container,
+#mensalidades {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.mensalidade-card {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mensalidade-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mensalidade-card h3 {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.mensalidade-card p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.mensalidade-card span.pago {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.mensalidade-card span.pendente {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.btn-pagar {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pagar:hover {
+  background-color: #2563eb;
+}
+
+#mensalidades p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 2rem;
   }
-  
-  .header {
-    background: #333;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
+
+  main {
+    padding: 20px 10px;
   }
-  
-  .mensalidades-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem;
-    justify-content: center;
+
+  .mensalidades-container,
+  #mensalidades {
+    grid-template-columns: 1fr;
   }
-  
-  .mensalidade-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    width: 280px;
-    padding: 1rem;
-  }
-  
-  .mensalidade-card h3 {
-    margin-top: 0;
-    color: #333;
-  }
-  
-  .mensalidade-card p {
-    margin: 0.5rem 0;
-    color: #555;
-  }
-  
-  .mensalidade-card .status {
-    font-weight: bold;
-  }
-  
-  .mensalidade-card .status.pago {
-    color: green;
-  }
-  
-  .mensalidade-card .status.pendente {
-    color: red;
-  }
-  
+}

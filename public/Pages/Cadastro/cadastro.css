@@ -1,45 +1,147 @@
-body {
-    background: #f0f2f5;
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Cabeçalho */
+  .cabecalho {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  
+  .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .logo span {
+    color: #00bcd4;
+  }
+  
+  /* Navegação */
+  .navegacao .menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .menu li a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .menu li a:hover,
+  .menu li a.ativo {
+    color: #00bcd4;
+  }
+  
+  .menu-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .menu-mobile span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    display: block;
+  }
+  
+  /* Formulário de Cadastro */
+  .cadastro-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cadastro-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #0f2027;
+  }
+  
+  #cadastroForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.cadastro-container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 320px;
-    margin-top: 50px;
-}
-
-.cadastro-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.cadastro-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    gap: 20px;
+  }
+  
+  #cadastroForm input {
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.cadastro-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+  #cadastroForm input:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+    outline: none;
+  }
+  
+  #cadastroForm button {
+    background-color: #00bcd4;
+    color: #fff;
+    padding: 12px;
+    font-size: 1.1rem;
     border: none;
-    color: white;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-}
-
-.cadastro-container button:hover {
-    background-color: #45a049;
-}
+    transition: background 0.3s;
+  }
+  
+  #cadastroForm button:hover {
+    background-color: #0097a7;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .navegacao .menu {
+      display: none;
+    }
+  
+    .menu-mobile {
+      display: flex;
+    }
+  
+    .cadastro-container {
+      margin: 40px 20px;
+      padding: 30px 20px;
+    }
+  
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

@@ -1,73 +1,156 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: #333;
-    padding: 10px;
-    color: white;
-}
-
-header .logo {
-    text-decoration: none;
-    color: white;
-    font-size: 24px;
-}
-
-header nav ul {
-    list-style-type: none;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Cabeçalho */
+  .cabecalho {
+    background-color: #0d1117;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
     display: flex;
-    justify-content: flex-end;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-.agendar-container {
-    padding: 30px;
-}
-
-.agendar-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.aulas-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.aula-card {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .logo span {
+    color: #00bcd4;
+  }
+  
+  .navegacao .menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .navegacao .menu li a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .navegacao .menu li a:hover {
+    color: #00bcd4;
+  }
+  
+  /* Conteúdo principal */
+  .agendar-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
     text-align: center;
-}
-
-.aula-card h3 {
-    font-size: 18px;
+  }
+  
+  .agendar-container h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #0d1117;
+  }
+  
+  /* Grid de Aulas */
+  .aulas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding-bottom: 40px;
+  }
+  
+  /* Card da Aula */
+  .card-aula {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-aula:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-aula img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .card-aula .info {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .card-aula .info h3 {
     margin-bottom: 10px;
-}
-
-.aula-card p {
-    margin: 5px 0;
-}
-
-.agendar-btn {
+    font-size: 1.2rem;
+    color: #0d1117;
+  }
+  
+  .card-aula .info p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .card-aula .info button {
     margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
+    background-color: #00bcd4;
     border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.95rem;
     cursor: pointer;
-}
-
-.agendar-btn:hover {
-    background-color: #45a049;
-}
+    transition: background 0.3s;
+  }
+  
+  .card-aula .info button:hover {
+    background-color: #0097a7;
+  }
+  
+  /* Responsividade extra */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navegacao .menu {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .logo {
+      margin-bottom: 10px;
+    }
+  
+    .agendar-container h2 {
+      font-size: 1.6rem;
+    }
+  }
+  
