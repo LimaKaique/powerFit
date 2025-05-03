@@ -6,7 +6,7 @@
     <title>PowerFit - Transforme seu corpo, mude sua vida</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="sobre.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -17,8 +17,8 @@
             <div class="hero-conteudo">
                 <h1 class="hero-titulo">Transforme seu corpo, mude sua vida</h1>
                 <p class="hero-texto">Na PowerFit, acreditamos que todo mundo tem potencial para ser a melhor versão de si mesmo.</p>
-                <a href="planos.html" class="btn-primario">Conheça nossos planos</a>
-                <a href="sobre.html" class="btn-secundario">Nossa metodologia</a>
+                <a href="/Pages/Plano/planos.html" class="btn-primario">Conheça nossos planos</a>
+                <a href="/index.html" class="btn-secundario">Nossa metodologia</a>
             </div>
         </div>
     </section>
@@ -132,7 +132,7 @@
     
           // só então carregue o JS específico da página
           const pageScript = document.createElement('script');
-          pageScript.src = 'Pages/inicio/sobre.js';  // ajuste para cada página
+          pageScript.src = '/index.js';  // ajuste para cada página
           document.body.appendChild(pageScript);
         })();
       </script>
