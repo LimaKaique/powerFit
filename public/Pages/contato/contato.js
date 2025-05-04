@@ -148,4 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
             cookieBanner.style.display = 'none';
         });
     }
+    
 });

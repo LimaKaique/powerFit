@@ -1,147 +1,174 @@
+:root {
+  --primary: #00bcd4;
+  --primary-dark: #0097a7;
+  --background: #f4f6f8;
+  --foreground: #333;
+  --header-bg: #0d1117;
+  --header-text: #fff;
+  --gray-light: #555;
+  --text-muted: #ccc;
+
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition-fast: 0.3s ease;
+}
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: #fff;
-    min-height: 100vh;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Cabeçalho */
-  .cabecalho {
-    background-color: rgba(0, 0, 0, 0.85);
-    padding: 20px 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-  
-  .logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .logo span {
-    color: #00bcd4;
-  }
-  
-  /* Navegação */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f4f6f8, #f4f6f8, #f4f6f8);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Container principal */
+.cabecalho .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Cabeçalho */
+.cabecalho {
+  background-color: var(--header-bg);
+  padding: 20px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--header-text);
+  text-decoration: none;
+}
+
+
+.logo span {
+  color: #ff4757;
+}
+
+/* Navegação */
+.navegacao .menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.menu li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background var(--transition-fast);
+}
+
+.menu li a:hover,
+.menu li a.ativo {
+  background-color: red;
+  color: white;
+}
+
+/* Ícone mobile */
+.menu-mobile {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-mobile span {
+  height: 3px;
+  width: 25px;
+  background: var(--text-muted);
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+/* Formulário de Cadastro */
+.cadastro-container {
+  background-color: white;
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;}
+
+.cadastro-container h2 {
+  margin-bottom: 20px;
+  color: var(--header-bg);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#cadastroForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#cadastroForm input {
+  padding: 14px;
+  background: var(--background);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--foreground);
+}
+
+#cadastroForm input:focus {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--gray-light);
+}
+
+#cadastroForm button {
+  padding: 14px;
+  background-color:red;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+#cadastroForm button:hover {
+  background-color: red;
+  transform: scale(1.05);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
   .navegacao .menu {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-  }
-  
-  .menu li a {
-    color: #ccc;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-  
-  .menu li a:hover,
-  .menu li a.ativo {
-    color: #00bcd4;
-  }
-  
-  .menu-mobile {
     display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
   }
-  
-  .menu-mobile span {
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    display: block;
-  }
-  
-  /* Formulário de Cadastro */
-  .cadastro-container {
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #333;
-    max-width: 500px;
-    margin: 60px auto;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .cadastro-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: #0f2027;
-  }
-  
-  #cadastroForm {
+
+  .menu-mobile {
     display: flex;
+  }
+
+  .cadastro-container {
+    margin: 2.5rem 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .container {
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
   }
-  
-  #cadastroForm input {
-    padding: 12px 15px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    transition: border 0.3s, box-shadow 0.3s;
-  }
-  
-  #cadastroForm input:focus {
-    border-color: #00bcd4;
-    box-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
-    outline: none;
-  }
-  
-  #cadastroForm button {
-    background-color: #00bcd4;
-    color: #fff;
-    padding: 12px;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  #cadastroForm button:hover {
-    background-color: #0097a7;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .navegacao .menu {
-      display: none;
-    }
-  
-    .menu-mobile {
-      display: flex;
-    }
-  
-    .cadastro-container {
-      margin: 40px 20px;
-      padding: 30px 20px;
-    }
-  
-    .container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-  
+}

@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const div = document.getElementById('aulas');
     aulas.forEach(a => {
       const card = document.createElement('div');
+      card.classList.add('card-aula');
       card.innerHTML = `
         <h3>${a.nome}</h3>
         <p>${a.instrutor}</p>

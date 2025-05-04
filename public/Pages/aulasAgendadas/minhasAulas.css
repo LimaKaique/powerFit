@@ -1,70 +1,151 @@
+:root {
+  --primary: #00bcd4;
+  --primary-dark: #0097a7;
+  --background: #f4f6f8;
+  --foreground: #333;
+  --header-bg: #0d1117;
+  --header-text: #fff;
+  --gray-light: #555;
+  --text-muted: #ccc;
+
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition-fast: 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+h1{color: white;}
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  line-height: 1.6;
-  padding: 20px;
-}
-
-header {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-header h1 {
-  font-size: 2rem;
-  letter-spacing: 1px;
-}
-
-.aulas-container {
+  font-family: var(--font-main);
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  
 }
 
+/* Cabeçalho */
+.cabecalho {
+  background-color: var(--header-bg);
+  padding: 20px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.cabecalho .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--header-text);
+  text-decoration: none;
+}
+
+.logo span {
+  color: #ff4757;
+}
+
+.navegacao .menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navegacao .menu li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background var(--transition-fast);
+}
+
+.navegacao .menu li a:hover,
+.navegacao .menu li a.ativo {
+  background-color: red;
+  color: white;
+}
+
+/* Menu Mobile */
+.menu-mobile {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-mobile span {
+  height: 3px;
+  width: 25px;
+  background: var(--text-muted);
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+/* 1) container em grid, para separar os cards */
+.aulas-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;               /* espaço entre as caixas */
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;        /* centraliza horizontal e dá margem vertical */
+  padding: 0 1rem;
+}
+
+/* 2) estilo da “box” de cada aula */
 .aula {
   background-color: #fff;
-  border-left: 6px solid #3b82f6;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;            /* espaço interno entre título e parágrafos */
 }
 
+/* efeito hover */
 .aula:hover {
-  transform: scale(1.02);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
-.aula h2 {
-  font-size: 1.5rem;
-  color: #1a1a1a;
-  margin-bottom: 10px;
+/* título */
+.aula h3 {
+  font-size: 1.4rem;
+  color: var(--foreground);
 }
 
+/* detalhes */
 .aula p {
-  font-size: 1rem;
-  margin-bottom: 6px;
-  color: #555;
+  font-size: 0.95rem;
+  color: var(--gray-light);
+  line-height: 1.4;
 }
+
+
 
 @media (max-width: 768px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .aula h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .aula p {
